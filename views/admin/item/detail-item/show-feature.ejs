@@ -1,0 +1,67 @@
+<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-7">
+                    <form method="POST" action="/admin/item/add/feature" enctype="multipart/form-data">
+                        <div class="modal-body">  
+                            <div class="form-group">
+                              <label for="exampleInputName1">Name:</label>
+                              <input type="text" class="form-control" name="name" id="exampleInput1" placeholder="Enter Name" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputName1">Qty:</label>
+                              <input type="number" class="form-control" name="qty" id="exampleInput1" placeholder="Enter Qty" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputName1">Image:</label>
+                                <input type="file" class="form-control" name="image" id="exampleInput1" required>
+                              </div>
+                        </div>
+                        <input type="hidden" value="<%= itemId %>" name="itemId"/>
+                    
+                          <button type="submit" class="btn btn-primary">Add</button>
+       
+                      </form> 
+                </div>
+                <div class="col-md-5">
+                    <div class="table-responsive">
+                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>QTY</th>
+                            <th>Image</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% for(let i = 0; i < feature.length; i++){ %>
+                            <tr>
+                            <td><%= i + 1 %></td>
+                            <td><%=feature[i].name %></td>
+                            <td><%=feature[i].qty %></td>
+                            <td><img src="http://localhost:3000/<%=feature[i].imageUrl %>" alt="imagefeature" width="70px"/></td>
+                            <td>
+                              <form action="/admin/item/<%= itemId %>/feature/<%=feature[i].id %>?_method=DELETE" method="POST">
+                              <a href="javascript:void()" type="button" class="btn-warning btn-circle btn-sm button-update" data-id="<%=feature[i].id %>" data-name="<%=feature[i].name %>" data-qty="<%=feature[i].qty %>"><i class="fas fa-edit"></i></a>
+                              <button type="submit" class="btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
+                            </form>
+                            </td>
+                            
+                          </tr>
+                            <% }%>
+                         </tbody>
+                      </table>
+                    </div>
+                </div>
+            </div>
+     
+        </div>
+      </div>
+    
+  
+    </div>
+  
+  
