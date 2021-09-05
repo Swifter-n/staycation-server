@@ -7,6 +7,7 @@ const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
 const mongoose = require('mongoose');
+var cors = require('cors');
 mongoose.connect('mongodb+srv://root:suckseed@cluster0.kwtkm.mongodb.net/db_staycation?retryWrites=true&w=majority', {useNewUrlParser:true, useUnifiedTopology:true, useCreateIndex:true,useFindAndModify:false});
 
 var indexRouter = require('./routes/index');
@@ -35,7 +36,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/sb-admin-2', express.static(path.join(__dirname, 'node_modules/startbootstrap-sb-admin-2')));
-
+app.use(cors());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 //admin
